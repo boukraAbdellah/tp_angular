@@ -10,6 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
- 
- 
+  number = 1;
+  show() {
+    this.number === 1 ? this.number = 2 : this.number = 1;
+  }
+
+
 }

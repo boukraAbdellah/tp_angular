@@ -1,6 +1,6 @@
 <style>
   section {
-    margin: 50px auto;
+   
     text-align: center;
     background: #F4f4f4;
     padding: 20px;
@@ -11,7 +11,8 @@
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    gap: 10px;
   }
 
   label {
@@ -25,32 +26,38 @@
     margin: 5px 0;
   }
 
-  button {
-    background: #47c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background: #333;
-  }
+  
 </style>
 
 <section>
   <h2>Contact</h2>
   <p>Send us a message!</p>
   <form>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-    <label for="message">Message</label>
-    <textarea id="message" name="message" required></textarea>
-    <button type="submit">Send</button>
+    <div style="display: flex; justify-content: space-between; gap: 40px; align-items: center;">
+  <label for="nom">Nom</label>
+  <input type="text" required name="nom" #nom="ngModel" [(ngModel)]="n" pattern=".*\s.*" minlength="3" />
+  <div *ngIf="nom.invalid && nom.dirty">
+    <small *ngIf="nom.errors?.['pattern']" style="color: red;">Nom is Invalid</small>
+    <small *ngIf="nom.errors?.['required']" style="color: red;">Nom is Required</small>
+  </div>
+    </div>
+   
+      
+
+      <label>
+        <input type="checkbox" [(ngModel)]="isChecked" name="check" #check="ngModel" required />
+<span>Check Me</span>  
+    </label>
+      <button type="submit"  [disabled]="nom.invalid || !isChecked">Send</button>
   </form>
+
+    <!-- <p><b>valeur de l'email: </b>{{nom.value}}</p>
+    <p><b>touched: </b>{{nom.touched}}</p>
+    <p><b>pristine: </b>{{nom.pristine}}</p>
+    <p><b>dirty: </b>{{nom.dirty}}</p>
+    <p><b>valid: </b>{{nom.valid}}</p>
+    <p><b>invalid: </b>{{nom.invalid}}</p>
+    <p>{{nom.value}}</p> -->
 </section>
 
 
